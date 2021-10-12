@@ -2,7 +2,6 @@ from dataclasses import dataclass
 
 from app.configs.database import db
 from sqlalchemy import Column, Integer, VARCHAR
-from sqlalchemy.sql.sqltypes import Text
 
 
 @dataclass
