@@ -1,4 +1,4 @@
-# desafio_backend_itflex
+# desafio_backend_iTFLEX
 
 CRUD de usuário com autenticação e autorização.
 
@@ -11,6 +11,15 @@ O desafio é criar API para gerenciamento de certificados e uma interface para c
 ### Deploy no Heroku - Base URL
 
 https://desafio-backend-itflex.herokuapp.com/
+
+</br>
+
+### Diagrama ER
+
+</br>
+</br>
+
+![diagram_er](./diagram_er.png)
 
 </br>
 </br>
@@ -55,5 +64,5 @@ https://desafio-backend-itflex.herokuapp.com/
 - **Rode, e teste as rotas**
 
   ```
-  $ flask run
+  $ gunicorn "app:create_app()"
   ```
