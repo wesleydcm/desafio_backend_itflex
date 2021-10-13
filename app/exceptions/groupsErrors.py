@@ -1,7 +1,7 @@
 class InvalidGroupError(Exception):
 
-    valide_options: dict = {
-        'valide_options' : {
+    valid_codes: dict = {
+        'valid_codes' : {
                 "01": "Adm",
                 "15": "Comercial",
                 "30": "RH"
@@ -12,7 +12,7 @@ class InvalidGroupError(Exception):
         self.received_code = code
 
         self.message = {
-            'valide_options': self.valide_options['valide_options'],
+            'valid_codes': self.valid_codes['valid_codes'],
             'received_code': self.received_code
         }
 

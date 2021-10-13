@@ -10,6 +10,7 @@ from app.exceptions.groupsErrors import InvalidGroupError
 class Groups(db.Model):
 
     code: int
+    group_name: str
 
     __tablename__ = 'groups'
 
