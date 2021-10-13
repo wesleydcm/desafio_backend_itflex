@@ -27,5 +27,7 @@ class Groups(db.Model):
             return {"code": code, "group_name": "Comercial"}
         elif int(code) == 30:
             return {"code": code, "group_name": "RH"}
+        elif int(code) == 45:
+            return {"code": code, "group_name": "Programação"}
         else:
             raise InvalidGroupError(code)

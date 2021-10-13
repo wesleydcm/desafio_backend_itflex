@@ -85,13 +85,22 @@ O desafio é criar API para gerenciamento de certificados e uma interface para c
 
     POST /api/certificates
 
-- Precisa enviar no corpo da requisição:
+- Corpo da requisição deve conter:
 
-  - "username" obrigatório e único, permitindo caracteres `a-z` e `0-9` e máximo de caracteres 30.
-  - "name" => obrigatório e máximo de caracteres deve ser 255
-  - "description" => não é obrigatório
-  - "groups" => lista com código dos grupos
-  - "expiration" => representa o número de dias que o certificado é valido, o número deve estar entre 10 e 3650.
+  - username
+    - Deve ser único, somente caracteres de `a-z` e `0-9` com máximo de caracteres 30
+  - name
+    - Máximo de caracteres deve ser 255
+  - description
+    - Não é obrigatório
+  - expiration
+    - Representa o número de dias que o certificado é valido, o número deve estar entre 10 e 3650.
+  - groups
+    - lista com código dos grupos
+      - 01: Adm
+      - 15: Comercial
+      - 30: RH
+      - 45: TI
 
 **_Exemplo de envio_**
 
@@ -199,6 +208,93 @@ GET /api/certificates/of_the_name/<string:name>
 
 <br>
 <br>
+
+> ### PATCH - Atualiza Certificados
+
+<br>
+
+```
+PATCH /api/certificates/<int:id>
+```
+
+- É possivel atualizar os seguintes dados:
+
+  - username
+    - Deve ser único, somente caracteres de `a-z` e `0-9` com máximo de caracteres 30
+  - name
+    - Máximo de caracteres deve ser 255
+  - description
+    - Não é obrigatório
+  - expiration
+    - Representa o número de dias que o certificado é valido, o número deve estar entre 10 e 3650.
+  - groups
+    - lista com código dos grupos
+      - 01: Adm
+      - 15: Comercial
+      - 30: RH
+      - 45: TI
+
+- Os campos a serem atualizados, têm as mesma restrições citadas no cadastro de certificados.
+
+**_Exemplo de update_**
+
+- Antes da atualização
+
+  ```
+  {
+      "id": 1,
+      "username": "wesleydcm",
+      "name": "Wesley da Costa Matos",
+      "description": "",
+      "expiration": 3650,
+      "expirated_at": "Fri, 10 Oct 2031 18:36:00 GMT",
+      "created_at": "Tue, 12 Oct 2021 15:36:00 GMT",
+      "updated_at": "Tue, 12 Oct 2021 15:36:00 GMT",
+      "groups": [
+        {
+          "code": 1,
+          "group_name": "Adm"
+        },
+        {
+          "code": 15,
+          "group_name": "Comercial"
+        }
+      ]
+  }
+  ```
+
+- Corpo requisição
+
+  ```
+  PATCH /api/certificates/1
+
+  {
+      "name": "Python 3"
+      "description": "Curso intermediario de Python 3",
+      "expiration": 365,
+      "groups": [45]
+  }
+  ```
+
+- Resposta
+  ```
+  {
+    "id": 1,
+    "username": "wesleydcm",
+    "name": "Python 3",
+    "description": "Curso intermediario de Python 3",
+    "expiration": 365,
+    "expirated_at": "Wed, 12 Oct 2022 15:36:00 GMT",
+    "created_at": "Tue, 12 Oct 2021 15:36:00 GMT",
+    "updated_at": "Wed, 13 Oct 2021 08:03:41 GMT",
+    "groups": [
+      {
+        "code": 45,
+        "group_name": "Programação"
+      }
+    ]
+  }
+  ```
 
 > ### Delete - Certificados
 
