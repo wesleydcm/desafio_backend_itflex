@@ -1,27 +1,41 @@
 # desafio_backend_iTFLEX
 
-CRUD de certificados.
+## Objetivo
 
 </br>
 
-> ## Objetivo
+> Criar API para gerenciamento de certificados e uma interface para consumir essas apis.
+> O front e back devem ser contruidos separadamente utilizando conceito de RESTAPI.
+> Deve-se poder cadastrar, listar, editar e deletar.
 
 </br>
 
-O desafio é criar API para gerenciamento de certificados e uma interface para consumir essas apis. O front e back devem ser contruidos separadamente utilizando conceito de RESTAPI. Deve-se poder cadastrar, listar, editar e deletar.
+## Tecnologias empregadas:
 
-</br>
-</br>
-
-> ## Deploy no Heroku - Base URL
+- Linguagem:
+  - Python 3
+- Framework:
+  - Flask
+- Banco de dados e migração:
+  - PostgreSQL
+  - Flask-Migrate
+- ORM:
+  - Flask-SQLAlchemy
+- Design pattens:
+  - Blueprints
+  - e design pattern Flask Factory.
+- Deploy no Heroku
+- entre outras.
 
 <br>
 
-- https://desafio-backend-itflex.herokuapp.com/
+### BASE URI - certificates
 
-</br></br>
+- https://desafio-backend-itflex.herokuapp.com/api/certificates
 
-> ## Diagrama ER
+</br>
+
+## Diagrama ER
 
 </br>
 
@@ -30,7 +44,7 @@ O desafio é criar API para gerenciamento de certificados e uma interface para c
 </br>
 </br></br>
 
-> ## Inicializando o app
+## Inicializando o app
 
 </br>
 
@@ -73,13 +87,13 @@ O desafio é criar API para gerenciamento de certificados e uma interface para c
   $ gunicorn "app:create_app()"
   ```
 
-<br><br></br></br>
+<br><br>
 
-> ## Endpoints
+## Endpoints
 
-<br></br>
+<br>
 
-> ### POST - Cadastro de certificados
+> ## Cadastro de certificados
 
 <br>
 
@@ -104,34 +118,35 @@ O desafio é criar API para gerenciamento de certificados e uma interface para c
 
 **_Exemplo de envio_**
 
-    {
-        "username": "wesleydcm",
-        "name": "Wesley da Costa Matos",
-        "description": "",
-        "groups": [1, 15],
-        "expiration" 3650,
-    }
+```json
+{
+  "username": "wesleydcm",
+  "name": "Wesley da Costa Matos",
+  "description": "",
+  "groups": [1, 15],
+  "expiration": 3650
+}
+```
 
 **_Exemplo de resposta_**
 
-    {
-        "id": 1,
-        "username": "wesleydcm",
-        "name": "Wesley da Costa Matos",
-        "description": "",
-        "expiration": 3650,
-        "expirated_at": "Fri, 10 Oct 2031 18:36:00 GMT",
-        "created_at": "Tue, 12 Oct 2021 15:36:00 GMT",
-        "updated_at": "Tue, 12 Oct 2021 15:36:00 GMT",
-        "groups": [
-            1,
-            15
-        ]
-    }
+```json
+{
+  "id": 1,
+  "username": "wesleydcm",
+  "name": "Wesley da Costa Matos",
+  "description": "",
+  "expiration": 3650,
+  "expirated_at": "Fri, 10 Oct 2031 18:36:00 GMT",
+  "created_at": "Tue, 12 Oct 2021 15:36:00 GMT",
+  "updated_at": "Tue, 12 Oct 2021 15:36:00 GMT",
+  "groups": [1, 15]
+}
+```
 
 <br><br></br>
 
-> ### GET - Lista certificados cadastrados
+> ## Lista todos certificados cadastrados
 
 </br>
 
@@ -155,9 +170,9 @@ GET /api/certificates
   GET /api/certificates?order_by=name
   ```
 
-</br></br></br>
+</br></br>
 
-> ### GET - Lista certificados de um username/name especifico
+> ## Lista certificados de um username/name especifico
 
 </br>
 
@@ -169,47 +184,53 @@ ou
 GET /api/certificates/of_the_name/<string:name>
 ```
 
-**_Exemplo_**
+**_Exemplo de envio_**
 
     GET /api/certificates/of_the_username/wesleydcm
 
 **_Exemplo de resposta_**
 
+```json
+{
+  "id": 1,
+  "username": "wesleydcm",
+  "name": "Wesley da Costa Matos",
+  "description": "",
+  "expiration": 3650,
+  "expirated_at": "Fri, 10 Oct 2031 18:36:00 GMT",
+  "created_at": "Tue, 12 Oct 2021 15:36:00 GMT",
+  "updated_at": "Tue, 12 Oct 2021 15:36:00 GMT",
+  "groups": [
     {
-      "id": 1,
-      "username": "wesleydcm",
-      "name": "Wesley da Costa Matos",
-      "description": "",
-      "expiration": 3650,
-      "expirated_at": "Fri, 10 Oct 2031 18:36:00 GMT",
-      "created_at": "Tue, 12 Oct 2021 15:36:00 GMT",
-      "updated_at": "Tue, 12 Oct 2021 15:36:00 GMT",
-      "groups": [
-        {
-          "code": 1,
-          "group_name": "Adm"
-        },
-        {
-          "code": 15,
-          "group_name": "Comercial"
-        }
-      ]
+      "code": 1,
+      "group_name": "Adm"
+    },
+    {
+      "code": 15,
+      "group_name": "Comercial"
     }
+  ]
+}
+```
 
-**_Caso nao tenha certificados para um username, vocẽ deve ter o seguinte retorno:_**
+**Caso nao tenha certificados para um username, vocẽ deve ter o seguinte retorno:**
+
+**_Exemplo de envio_**
 
     GET /api/certificates/of_the_username/batman
 
-```
-    {
-      "msg": "there are no certificates for username: batman"
-    }
+**_exemplo de resposta_**
+
+```json
+{
+  "msg": "there are no certificates for username: batman"
+}
 ```
 
 <br>
 <br>
 
-> ### PATCH - Atualiza Certificados
+> ## Atualiza certificados
 
 <br>
 
@@ -236,73 +257,84 @@ PATCH /api/certificates/<int:id>
 
 - Os campos a serem atualizados, têm as mesma restrições citadas no cadastro de certificados.
 
-**_Exemplo de update_**
+**Exemplo de update**
 
 - Antes da atualização
 
-  ```
-  {
-      "id": 1,
-      "username": "wesleydcm",
-      "name": "Wesley da Costa Matos",
-      "description": "",
-      "expiration": 3650,
-      "expirated_at": "Fri, 10 Oct 2031 18:36:00 GMT",
-      "created_at": "Tue, 12 Oct 2021 15:36:00 GMT",
-      "updated_at": "Tue, 12 Oct 2021 15:36:00 GMT",
-      "groups": [
-        {
-          "code": 1,
-          "group_name": "Adm"
-        },
-        {
-          "code": 15,
-          "group_name": "Comercial"
-        }
-      ]
-  }
-  ```
-
-- Corpo requisição
-
-  ```
-  PATCH /api/certificates/1
-
-  {
-      "name": "Python 3"
-      "description": "Curso intermediario de Python 3",
-      "expiration": 365,
-      "groups": [45]
-  }
-  ```
-
-- Resposta
-  ```
+  ```json
   {
     "id": 1,
     "username": "wesleydcm",
-    "name": "Python 3",
-    "description": "Curso intermediario de Python 3",
-    "expiration": 365,
-    "expirated_at": "Wed, 12 Oct 2022 15:36:00 GMT",
+    "name": "Wesley da Costa Matos",
+    "description": "",
+    "expiration": 3650,
+    "expirated_at": "Fri, 10 Oct 2031 18:36:00 GMT",
     "created_at": "Tue, 12 Oct 2021 15:36:00 GMT",
-    "updated_at": "Wed, 13 Oct 2021 08:03:41 GMT",
+    "updated_at": "Tue, 12 Oct 2021 15:36:00 GMT",
     "groups": [
       {
-        "code": 45,
-        "group_name": "Programação"
+        "code": 1,
+        "group_name": "Adm"
+      },
+      {
+        "code": 15,
+        "group_name": "Comercial"
       }
     ]
   }
   ```
 
+**_Exemplo de envio_**
+
+```
+PATCH /api/certificates/1
+```
+
+```json
+{
+    "name": "Python 3"
+    "description": "Curso intermediario de Python 3",
+    "expiration": 365,
+    "groups": [45]
+}
+```
+
+**_Exemplo de resposta_**
+
+```json
+{
+  "id": 1,
+  "username": "wesleydcm",
+  "name": "Python 3",
+  "description": "Curso intermediario de Python 3",
+  "expiration": 365,
+  "expirated_at": "Wed, 12 Oct 2022 15:36:00 GMT",
+  "created_at": "Tue, 12 Oct 2021 15:36:00 GMT",
+  "updated_at": "Wed, 13 Oct 2021 08:03:41 GMT",
+  "groups": [
+    {
+      "code": 45,
+      "group_name": "Programação"
+    }
+  ]
+}
+```
+
 <br>
 <br>
 
-> ### Delete - Certificados
+> ## Deletar certificados
 
 <br>
 
 ```
 DELETE /api/certificates/<int:id>
+```
+
+- Caso tenha sucesso a rota não retorna dados do certificado corpo, caso o id informado não exista, você terá a seguinte resposta
+
+```json
+{
+  "msg": "certificate not found!"
+}
 ```
