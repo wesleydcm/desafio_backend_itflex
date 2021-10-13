@@ -1,6 +1,0 @@
-class InvalidCertificateError(Exception):
-    ...
-
-
-class InvalidUserNameError(Exception):
-    ...

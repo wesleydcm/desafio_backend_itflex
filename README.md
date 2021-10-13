@@ -132,8 +132,8 @@ O desafio é criar API para gerenciamento de certificados e uma interface para c
 <br><br></br>
 
 > ### GET - Lista certificados cadastrados
->
-> </br>
+
+</br>
 
 ```
 GET /api/certificates

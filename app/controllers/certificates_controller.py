@@ -1,16 +1,14 @@
 from dataclasses import asdict
 from datetime import datetime, timedelta, timezone
 from http import HTTPStatus
+
 import psycopg2
-from app.exceptions.certificatesErrors import InvalidCertificateError
 from app.exceptions.groupsErrors import InvalidGroupError
 from app.models.certificates_model import Certificates
 from app.models.groups_model import Groups
-from flask import current_app, jsonify, request
-from sqlalchemy.exc import (IntegrityError, InvalidRequestError,
-                            ProgrammingError)
-
 from app.models.queries_categories_model import QueriesCertificates
+from flask import current_app, jsonify, request
+from sqlalchemy.exc import IntegrityError, InvalidRequestError
 
 
 def list_certificates():
@@ -72,10 +70,6 @@ def create_certificate():
     except ValueError as e:
         return {"msg": str(e)}, HTTPStatus.BAD_REQUEST
     
-
-    except InvalidCertificateError as error:
-        return jsonify({'error': error.message}), HTTPStatus.NOT_FOUND
-
 
     except InvalidGroupError as error:
         return jsonify({'error': error.message}), HTTPStatus.NOT_FOUND

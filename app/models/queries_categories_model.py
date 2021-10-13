@@ -1,6 +1,6 @@
 from http import HTTPStatus
 
-from flask import current_app, jsonify, request
+from flask import jsonify
 
 from .certificates_model import Certificates
 
