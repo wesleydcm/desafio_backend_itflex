@@ -4,7 +4,8 @@ class InvalidGroupError(Exception):
         'valid_codes' : {
                 "01": "Adm",
                 "15": "Comercial",
-                "30": "RH"
+                "30": "RH",
+                "45": "TI"
         }
     }
 

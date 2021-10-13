@@ -296,6 +296,9 @@ PATCH /api/certificates/<int:id>
   }
   ```
 
+<br>
+<br>
+
 > ### Delete - Certificados
 
 <br>
